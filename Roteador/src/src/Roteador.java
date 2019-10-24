@@ -6,16 +6,16 @@ import java.util.Queue;
 public class Roteador extends DispositivoDeRede implements Roteamento {
 
     private Portas porta1, porta2, porta3, porta4, portaRede;
-    private Queue<Pacote> Buffers;
 
 
     public Roteador(){
-        this.Buffers = new LinkedList<>();
         this.porta1 = new Portas();
         this.porta2 = new Portas();
         this.porta3 = new Portas();
         this.porta4 = new Portas();
         this.portaRede = new Portas();
+        this.Ip = "";
+        this.Mac = "";
     }
 
 

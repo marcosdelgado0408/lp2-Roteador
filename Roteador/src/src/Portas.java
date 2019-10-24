@@ -1,23 +1,24 @@
 package src;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Portas {
 
-   Pacote bufferEntrada;
-   Pacote bufferSaida;
+  private Queue<Pacote> bufferEntrada;
+  private Queue<Pacote> bufferSaida;
 
    public Portas(){
-       this.bufferEntrada = new Pacote();
-       this.bufferEntrada = new Pacote();
+       this.bufferEntrada = new LinkedList<>();
+        this.bufferSaida = new LinkedList<>();
    }
 
+    public Queue<Pacote> getBufferEntrada() { return bufferEntrada; }
 
-    public Pacote getBufferEntrada() { return bufferEntrada; }
+    public void setBufferEntrada(Queue<Pacote> bufferEntrada) { this.bufferEntrada = bufferEntrada; }
 
-    public Pacote getBufferSaida() { return bufferSaida; }
+    public Queue<Pacote> getBufferSaida() { return bufferSaida; }
 
-    public void setBufferEntrada(Pacote bufferEntrada) { this.bufferEntrada = bufferEntrada; }
-
-    public void setBufferSaida(Pacote bufferSaida) { this.bufferSaida = bufferSaida; }
-
+    public void setBufferSaida(Queue<Pacote> bufferSaida) { this.bufferSaida = bufferSaida; }
 
 }
