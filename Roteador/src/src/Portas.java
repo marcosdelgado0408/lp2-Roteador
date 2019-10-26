@@ -19,6 +19,4 @@ public class Portas {
 
     public Queue<Pacote> getBufferSaida() { return bufferSaida; }
 
-    public void setBufferSaida(Queue<Pacote> bufferSaida) { this.bufferSaida = bufferSaida; }
-
 }

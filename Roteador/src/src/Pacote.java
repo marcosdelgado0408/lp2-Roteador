@@ -9,4 +9,9 @@ public class Pacote {
 
     public String getDestino() { return Destino; }
     public void setDestino(String destino) { Destino = destino; }
+
+    @Override
+    public String toString() {
+        return Dados + "-" + Destino;
+    }
 }
