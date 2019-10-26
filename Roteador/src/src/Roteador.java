@@ -9,6 +9,7 @@ package src;
     */
 
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,23 +27,18 @@ public class Roteador extends DispositivoDeRede implements Roteamento {
         this.portaRede = new Portas();
     }
 
-    public void setPortaRede(Portas portaRede) { this.portaRede = portaRede; }
     public Portas getPortaRede() { return portaRede; }
 
     public Portas getPortaEsquerda() { return portaEsquerda; }
-    public void setPortaEsquerda(Portas portaEsquerda) { this.portaEsquerda = portaEsquerda; }
 
     public Portas getPortaCima() { return portaCima; }
 
-    public void setPortaCima(Portas portaCima) { this.portaCima = portaCima; }
 
     public Portas getPortaDireita() { return portaDireita; }
 
-    public void setPortaDireita(Portas portaDireita) { this.portaDireita = portaDireita; }
 
     public Portas getPortaBaixo() { return portaBaixo; }
 
-    public void setPortaBaixo(Portas portaBaixo) { this.portaBaixo = portaBaixo; }
 
     @Override
     public void setIP(String Ip) { this.Ip = Ip; }
@@ -55,6 +51,8 @@ public class Roteador extends DispositivoDeRede implements Roteamento {
 
     @Override
     public String getMac() { return this.Mac; }
+
+
 
 
 
@@ -72,6 +70,8 @@ public class Roteador extends DispositivoDeRede implements Roteamento {
 
         System.out.println("Posição atual: " + this.getIp());
         System.out.println("Destino: " + destino);
+        System.out.println("Pacote em trânsito: " + pacote.getDados());
+
 
         // aparentemente o unico modo de dar split por um ponto é utilizando colchetes "[.]"
         int numeroDestino  = Integer.parseInt(destino.split("[.]")[3]); // pegando o último numero do ip
@@ -79,21 +79,19 @@ public class Roteador extends DispositivoDeRede implements Roteamento {
         int numeroAtual = Integer.parseInt(getIp().split("[.]")[3]); // pegando o último numero do ip
 
 
-        /*
-         Caso chegue no ip destino vai gravar a mensagem em um arquivo com o nome do ip desino
-        */
+
+        // Caso chegue no ip destino vai gravar a mensagem em um arquivo com o nome do ip desino
         if(this.getIp().equals(destino)) {
             try {
-                File file = new File(destino + ".txt");
-                FileWriter fileWriter = new FileWriter(file);
+                File file = new File(pacote.getDestino() + ".txt");
+                FileWriter fileWriter = new FileWriter(file, true); // true -> modo para dar append no arquivos
 
-                fileWriter.write(pacote.getDados());
+                fileWriter.write(pacote.getDados() + "\n");
 
                 fileWriter.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
             return "stop"; // caso o pacote ja esteja no seu destino;
         }
@@ -135,11 +133,6 @@ public class Roteador extends DispositivoDeRede implements Roteamento {
             }
 
         }
-
-
-
-
-
 
 
     }

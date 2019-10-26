@@ -18,6 +18,7 @@ public class GerenciadorRoteamento {
     public Roteador[][] roteadores;
 
 
+
     public GerenciadorRoteamento(){
         roteadores = new Roteador[3][3];
 
@@ -84,7 +85,6 @@ public class GerenciadorRoteamento {
 
                             roteadores[i][j].getPortaRede().getBufferEntrada().add(pacote);
 
-                           // System.out.println(roteadores[i][j].getPortaRede().getBufferEntrada());
                         }
                     }
                 }
@@ -110,8 +110,6 @@ public class GerenciadorRoteamento {
                 if(!portaRede.getBufferEntrada().isEmpty()){ // caso o buffer não for vazio
                     Pacote pacote = roteadores[i][j].getPortaRede().getBufferEntrada().remove();
                     String porta = roteadores[i][j].roteamento(pacote,roteadores,i,j); // essa função só retornará a porta para onde ele deve ir
-
-                    //System.out.println("Porta que veio da rede: " + porta);
 
                     switch (porta) {
                         case "portaDireita":
@@ -141,16 +139,12 @@ public class GerenciadorRoteamento {
     private void percorrerRoteadores(int i, int j, String porta) {
 
         Pacote pacote;
-        System.out.println(porta);
-        System.out.println(i);
-        System.out.println(j);
-
+        System.out.println("Porta destino: " + porta + "\n");
 
         switch (porta){
 
             case "portaDireita":
                 pacote = roteadores[i][j].getPortaDireita().getBufferSaida().remove();
-                System.out.println(pacote);
                 porta = roteadores[i][j].roteamento(pacote,this.roteadores,i,j);
                 if(porta.equals("stop")){
                     System.out.println("Pacote chegou ao seu destino\n");
@@ -194,8 +188,6 @@ public class GerenciadorRoteamento {
                 break;
 
         }
-
-
 
 
     }
